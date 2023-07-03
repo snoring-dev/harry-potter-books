@@ -22,7 +22,28 @@ export default class ShoppingCart {
     return new Array(5).fill(0);
   }
 
-  createCombinations() {}
+  getSortedCart() {
+    const _cart = new Map(
+      [...this.items.entries()].sort((a, b) => b[1] - a[1])
+    );
+    return _cart;
+  }
+
+  createCombinations() {
+    const all = [];
+    const sortedCart = this.getSortedCart();
+
+    for (let [bookNumber, qte] of sortedCart) {
+      for (let i = 0; i < qte; i++) {
+        // look if there is already a collection
+        const entry = all[i] ? all[i] : this.getEmptyArray();
+        entry[bookNumber - 1] = 1;
+        if (!all[i]) all.push(entry);
+      }
+    }
+
+    return all;
+  }
 
   checkout() {}
 }

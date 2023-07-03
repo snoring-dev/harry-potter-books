@@ -42,7 +42,7 @@ describe('ShoppingCart', () => {
       cart.addItem(1, 2);
       cart.addItem(2, 1);
       const combinations = cart.createCombinations();
-      expect(combinations).toEqual([[1, 1, 0, 0, 0], [1, 1, 1, 0, 0]]);
+      expect(combinations).toEqual([[1, 1, 0, 0, 0], [1, 0, 0, 0, 0]]);
     });
   });
 
