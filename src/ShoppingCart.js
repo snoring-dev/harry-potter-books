@@ -14,9 +14,13 @@ export default class ShoppingCart {
     }
   }
 
-  getDiscounts() {}
+  getDiscounts() {
+    return [0, 0, 0.05, 0.1, 0.2, 0.25];
+  }
 
-  getEmptyArray() {}
+  getEmptyArray() {
+    return new Array(5).fill(0);
+  }
 
   createCombinations() {}
 
