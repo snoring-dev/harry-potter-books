@@ -5,8 +5,8 @@ export default class ShoppingCart {
 
   addItem(bookNumber, quantity) {
     if (this.items.has(bookNumber)) {
-      const purchase = this.items.get(bookNumber);
-      const newQte = quantity + purchase;
+      const purchasedBooks = this.items.get(bookNumber);
+      const newQte = quantity + purchasedBooks;
       this.items.delete(bookNumber);
       this.items.set(bookNumber, newQte);
     } else {
@@ -30,20 +30,33 @@ export default class ShoppingCart {
   }
 
   createCombinations() {
-    const all = [];
+    const baskets = [];
     const sortedCart = this.getSortedCart();
 
     for (let [bookNumber, qte] of sortedCart) {
       for (let i = 0; i < qte; i++) {
         // look if there is already a collection
-        const entry = all[i] ? all[i] : this.getEmptyArray();
+        const entry = baskets[i] ? baskets[i] : this.getEmptyArray();
         entry[bookNumber - 1] = 1;
-        if (!all[i]) all.push(entry);
+        if (!baskets[i]) baskets.push(entry);
       }
     }
 
-    return all;
+    return baskets;
   }
 
-  checkout() {}
+  checkout() {
+    const baskets = this.createCombinations();
+    let total = 0;
+
+    baskets.forEach((basket, index) => {
+      const sum = basket.reduce((a, b) => a + b, 0);
+      const discount = this.getDiscounts()[sum];
+      const regularPrice = sum * 8;
+      const finalPrice = regularPrice - regularPrice * discount;
+      total += finalPrice;
+    });
+
+    return total.toFixed(2);
+  }
 }

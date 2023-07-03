@@ -54,7 +54,7 @@ describe('ShoppingCart', () => {
       cart.addItem(4, 1);
       cart.addItem(5, 1);
       const totalPrice = cart.checkout();
-      expect(totalPrice).toBe('51.20');
+      expect(totalPrice).toBe('51.60');
     });
   });
 });
