@@ -47,6 +47,12 @@ describe('ShoppingCart', () => {
   });
 
   describe('checkout', () => {
+    it('should not apply a discount for the same book', () => {
+      cart.addItem(1, 2);
+      const totalPrice = cart.checkout();
+      expect(totalPrice).toBe('16.00');
+    });
+    
     it('should calculate the total price for a basket', () => {
       cart.addItem(1, 2);
       cart.addItem(2, 2);
