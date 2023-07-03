@@ -3,13 +3,22 @@ export default class ShoppingCart {
     this.items = new Map();
   }
 
-  addItem(bookNumber, quantity) {}
+  addItem(bookNumber, quantity) {
+    if (this.items.has(bookNumber)) {
+      const purchase = this.items.get(bookNumber);
+      const newQte = quantity + purchase;
+      this.items.delete(bookNumber);
+      this.items.set(bookNumber, newQte);
+    } else {
+      this.items.set(bookNumber, quantity);
+    }
+  }
 
   getDiscounts() {}
 
   getEmptyArray() {}
 
-  createCombinatins() {}
+  createCombinations() {}
 
   checkout() {}
 }
