@@ -43,4 +43,18 @@ describe('BookStore', () => {
     expect(totalPrice).toBe(8);
   });
 
+  it('Two books of the same volume should cost 16€', () => {
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(16);
+  });
+
+  it('apply 5% discount for two different books', () => {
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(15.2);
+  });
+
 });

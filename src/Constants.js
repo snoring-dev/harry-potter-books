@@ -5,3 +5,5 @@ export const BOOKS_VOLUMES = Object.freeze({
   FOURTH: 4,
   FIFTH: 5,
 });
+
+export const SINGLE_BOOK_PRICE = 8;
