@@ -2,23 +2,29 @@ import { SINGLE_BOOK_PRICE } from "./Constants";
 
 export default class BookStore {
   constructor() {
-    this.books = [];
+    this.books = new Map();
+    this.numberOfBooks = 0;
   }
 
   getTotalPrice() {
-    const numberOfDistinctBooks = this.getDistinctBooks().size;
+    const numberOfDistinctBooks = this.getNumberOfDistinctBooks();
     if (numberOfDistinctBooks === 2) {
       return numberOfDistinctBooks * SINGLE_BOOK_PRICE * 0.95;
-    } else {
-      return this.books.length * SINGLE_BOOK_PRICE;
     }
+
+    return this.numberOfBooks * SINGLE_BOOK_PRICE;
   }
 
-  getDistinctBooks() {
-    return new Set(this.books);
+  getNumberOfDistinctBooks() {
+    return this.books.size;
   }
 
   addBook(volume) {
-    this.books.push(volume);
+    let amount = 0;
+    if (this.books.has(volume)) {
+      amount = this.books.get(volume);
+    }
+    this.books.set(volume, amount + 1);
+    this.numberOfBooks += 1;
   }
 }
