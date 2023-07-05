@@ -12,4 +12,10 @@ describe('BookStore', () => {
     expect(totalPrice).toBe(0);
   });
 
+  it('should cost 8€ when the cart contains one single book', () => {
+    cart.addBook(1);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(8);
+  });
+
 });

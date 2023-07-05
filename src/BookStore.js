@@ -6,4 +6,8 @@ export default class BookStore {
   getTotalPrice() {
     return this.books.length * 8;
   }
+
+  addBook(volume) {
+    this.books.push(volume);
+  }
 }
