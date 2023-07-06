@@ -147,4 +147,42 @@ describe("BookStore", () => {
     const totalPrice = cart.getTotalPrice();
     expect(totalPrice).toBe(30);
   });
+
+  it("5 books with one duplicated should receive 20% discount on four books", () => {
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(33.6);
+  });
+
+  it("6 books with 2 duplicated should receive 20% discount on 4 books and 5% on two books", () => {
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(40.8);
+  });
+
+  it("many different books costs what they should", () => {
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    cart.addBook(BOOKS_VOLUMES.FIFTH);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(30 + 25.6 + 15.2 + 8);
+  });
 });
