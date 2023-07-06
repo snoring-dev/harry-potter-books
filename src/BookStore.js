@@ -1,4 +1,4 @@
-import { SINGLE_BOOK_PRICE } from "./Constants";
+import { DISCOUNTS, SINGLE_BOOK_PRICE } from "./Constants";
 
 export default class BookStore {
   constructor() {
@@ -8,25 +8,22 @@ export default class BookStore {
   getTotalPrice() {
     const remainingBooks = new Map(this.books);
     let numberOfBooks = this.getNumberOfBooks(remainingBooks);
-    let numberOfDistinctBooks = this.getNumberOfDistinctBooks(remainingBooks);
     let totalPrice = 0;
 
     while (numberOfBooks > 0) {
-      if (numberOfDistinctBooks === 5) {
-        totalPrice += 5 * SINGLE_BOOK_PRICE * 0.75;
-      } else if (numberOfDistinctBooks === 4) {
-        totalPrice += 4 * SINGLE_BOOK_PRICE * 0.8;
-      } else if (numberOfDistinctBooks === 3) {
-        totalPrice += 3 * SINGLE_BOOK_PRICE * 0.9;
-      } else if (numberOfDistinctBooks === 2) {
-        totalPrice += 2 * SINGLE_BOOK_PRICE * 0.95;
+      const numberOfDistinctBooks =
+        this.getNumberOfDistinctBooks(remainingBooks);
+      if ([2, 3, 4, 5].includes(numberOfDistinctBooks)) {
+        totalPrice +=
+          numberOfDistinctBooks *
+          SINGLE_BOOK_PRICE *
+          DISCOUNTS[numberOfDistinctBooks];
       } else {
         totalPrice += SINGLE_BOOK_PRICE;
       }
 
       this.removeOneBookOnEachVolume(remainingBooks);
       numberOfBooks = this.getNumberOfBooks(remainingBooks);
-      numberOfDistinctBooks = this.getNumberOfDistinctBooks(remainingBooks);
     }
 
     return totalPrice;
