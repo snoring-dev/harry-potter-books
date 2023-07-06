@@ -12,7 +12,9 @@ export default class BookStore {
     let totalPrice = 0;
 
     while (numberOfBooks > 0) {
-      if (numberOfDistinctBooks === 3) {
+      if (numberOfDistinctBooks === 4) {
+        totalPrice += 4 * SINGLE_BOOK_PRICE * 0.8;
+      } else if (numberOfDistinctBooks === 3) {
         totalPrice += 3 * SINGLE_BOOK_PRICE * 0.9;
       } else if (numberOfDistinctBooks === 2) {
         totalPrice += 2 * SINGLE_BOOK_PRICE * 0.95;
