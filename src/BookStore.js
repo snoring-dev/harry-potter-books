@@ -12,7 +12,9 @@ export default class BookStore {
     let totalPrice = 0;
 
     while (numberOfBooks > 0) {
-      if (numberOfDistinctBooks === 2) {
+      if (numberOfDistinctBooks === 3) {
+        totalPrice += 3 * SINGLE_BOOK_PRICE * 0.9;
+      } else if (numberOfDistinctBooks === 2) {
         totalPrice += 2 * SINGLE_BOOK_PRICE * 0.95;
       } else {
         totalPrice += SINGLE_BOOK_PRICE;
@@ -47,9 +49,9 @@ export default class BookStore {
     let booksCount = 0;
 
     if (remainingBooks && remainingBooks.size > 0) {
-        remainingBooks.forEach((value) => booksCount += value);
+      remainingBooks.forEach((value) => (booksCount += value));
     }
-    
+
     return booksCount;
   }
 
