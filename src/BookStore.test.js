@@ -137,4 +137,14 @@ describe("BookStore", () => {
     const totalPrice = cart.getTotalPrice();
     expect(totalPrice).toBe(32);
   });
+
+  it("Five different books should receive 25% discount", () => {
+    cart.addBook(BOOKS_VOLUMES.FIRST);
+    cart.addBook(BOOKS_VOLUMES.SECOND);
+    cart.addBook(BOOKS_VOLUMES.THIRD);
+    cart.addBook(BOOKS_VOLUMES.FOURTH);
+    cart.addBook(BOOKS_VOLUMES.FIFTH);
+    const totalPrice = cart.getTotalPrice();
+    expect(totalPrice).toBe(30);
+  });
 });
